@@ -52,7 +52,7 @@ class SwaggerController extends BaseSwaggerController
         $response = Response::make(
             view('l5-swagger::index', [
                 'secure'             => Request::secure(),
-                'urlToDocs'          => route('l5-swagger.docs',
+                'urlToDocs'          => route("l5-swagger.{$this->project}.docs",
                     config($this->configPath .'paths.docs_json', 'api-docs.json')),
                 'operationsSorter'   => config($this->configPath . 'operations_sort'),
                 'configUrl'          => config($this->configPath . 'additional_config_url'),
