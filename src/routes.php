@@ -23,7 +23,7 @@ if (!empty($projects) && is_array($projects)) {
 
         $router->get(config($path .'routes.oauth2_callback'), [
             'as' => "l5-swagger.{$p}.oauth2_callback",
-            'middleware' => config($path .'routes.middleware.oauth2_callback', []),
+            'middleware' => conl5-swagger.assetfig($path .'routes.middleware.oauth2_callback', []),
             'uses' => '\L5Swagger\Http\Controllers\SwaggerController@oauth2Callback',
         ]);
 

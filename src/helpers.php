@@ -46,11 +46,11 @@ if (! function_exists('l5_swagger_asset')) {
      * Returns asset from swagger-ui composer package.
      *
      * @param $asset string
-     *
+     * @param $project string
      * @return string
      * @throws \L5Swagger\Exceptions\L5SwaggerException
      */
-    function l5_swagger_asset($asset)
+    function l5_swagger_asset($asset ,$project)
     {
         $file = swagger_ui_dist_path($asset);
 
@@ -58,6 +58,6 @@ if (! function_exists('l5_swagger_asset')) {
             throw new L5SwaggerException(sprintf('Requested L5 Swagger asset file (%s) does not exists', $asset));
         }
 
-        return route('l5-swagger.asset', $asset).'?v='.md5_file($file);
+        return route("l5-swagger.{$project}.asset", $asset).'?v='.md5_file($file);
     }
 }
