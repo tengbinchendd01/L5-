@@ -38,7 +38,6 @@ class Generator
                 $swagger->basePath = config($path . 'paths.base');
             }
 
-            $docFile = $docDir . '/' . config($path . 'paths.docs_json', 'api-docs.json');
             $swagger->saveAs($docFile);
 
             $security = new SecurityDefinitions();

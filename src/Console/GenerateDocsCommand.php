@@ -12,8 +12,7 @@ class GenerateDocsCommand extends Command
      *
      * @var string
      */
-    protected $name = 'l5-swagger:generate';
-
+    protected $signature = "l5-swagger:generate {projectVersion}";
     /**
      * The console command description.
      *
@@ -28,8 +27,8 @@ class GenerateDocsCommand extends Command
      */
     public function handle()
     {
-        $project  = $this->ask("which project do you want to generateDocs ?? ") ;
-        $this->info('Regenerating docs' ,$project) ;
+        $project = $this->argument('projectVersion');
+        $this->info('Regenerating docs', $project);
         Generator::generateDocs($project);
 
     }
