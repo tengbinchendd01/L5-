@@ -26,7 +26,7 @@ class L5SwaggerServiceProvider extends ServiceProvider
 
         //Publish views
         $this->publishes([
-            __DIR__ . '/../resources/views' => config('l5-swagger.views'),
+            __DIR__ . '/../resources/views' => config('l5-swagger.paths.views'),
         ], 'views');
 
         //Include routes

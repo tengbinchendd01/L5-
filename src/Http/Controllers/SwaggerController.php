@@ -3,6 +3,7 @@
 namespace L5Swagger\Http\Controllers;
 
 use File;
+use phpDocumentor\Reflection\DocBlock\Tags\Var_;
 use Request;
 use Response;
 use L5Swagger\Generator;
@@ -19,7 +20,7 @@ class SwaggerController extends BaseSwaggerController
     public function docs($jsonFile = null)
     {
         $filePath = config($this->configPath . 'paths.docs').'/'.
-            (! is_null($jsonFile) ? $jsonFile : config($this->configPath . 'paths.docs_json', $this->configPath . 'api-docs.json'));
+            (! is_null($jsonFile) ? $jsonFile : config($this->projectConfigPath . 'routes.docs_json'));
 
         if (! File::exists($filePath)) {
             abort(404, 'Cannot find '.$filePath);
@@ -54,7 +55,7 @@ class SwaggerController extends BaseSwaggerController
                 'project'            => $this->project ,
                 'secure'             => Request::secure(),
                 'urlToDocs'          => route("l5-swagger.{$this->project}.docs",
-                    config($this->configPath .'paths.docs_json', 'api-docs.json')),
+                    config($this->projectConfigPath .'routes.docs_json', 'api-docs.json')),
                 'operationsSorter'   => config($this->configPath . 'operations_sort'),
                 'configUrl'          => config($this->configPath . 'additional_config_url'),
                 'validatorUrl'       => config($this->configPath . 'validator_url'),
@@ -65,9 +66,8 @@ class SwaggerController extends BaseSwaggerController
         return $response;
     }
 
-    /**
-     * Display Oauth2 callback pages.
-     *
+    /*
+     * Display Oauth2 callback pages
      * @return string
      */
     public function oauth2Callback()

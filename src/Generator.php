@@ -10,10 +10,11 @@ class Generator
     public static function generateDocs($project)
     {
         $path   = "l5-swagger.projects." . $project . '.';
-        $appDir = config($path . 'paths.annotations');
-        $docDir = config($path . 'paths.docs');
 
-        $docFile = $docDir . '/' . config($path . 'paths.docs_json');
+        $appDir = config('l5-swagger.paths.annotations');
+        $docDir = config('l5-swagger.paths.docs');
+
+        $docFile = $docDir . '/' . config($path . 'routes.docs_json');
 
         if (File::exists($docDir)) {
 
@@ -27,14 +28,14 @@ class Generator
         }
 
         if (is_writable($docDir)) {
-            self::defineConstants(config($path . 'constants') ?: []);
+            self::defineConstants(config( 'l5-swagger.constants') ?: []);
 
 
-            $excludeDirs = config($path . 'paths.excludes');
+            $excludeDirs = config('l5-swagger.paths.excludes');
             $swagger     = \Swagger\scan($appDir . '/' . $project
                 , ['exclude' => $excludeDirs]);
 
-            if (config($path . 'paths.base') !== null) {
+            if (config('l5-swagger.paths.base') !== null) {
                 $swagger->basePath = config($path . 'paths.base');
             }
 
