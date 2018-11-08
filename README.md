@@ -13,7 +13,11 @@ You can publish L5-Swagger's config and view files into your project by running:
 ```bash
 $ php artisan vendor:publish --provider "L5Swagger\L5SwaggerServiceProvider"
 ```
-
+add env config run project or version  can be generate docs
+``````
+APP_RUN_VERSION=V1,V2
+``````
+===========
 this is base my project  
 
 ```php
