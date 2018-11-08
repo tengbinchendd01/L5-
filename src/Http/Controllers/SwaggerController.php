@@ -20,7 +20,7 @@ class SwaggerController extends BaseSwaggerController
     public function docs($jsonFile = null)
     {
         $filePath = config($this->configPath . 'paths.docs').'/'.
-            (! is_null($jsonFile) ? $jsonFile : config($this->projectConfigPath . 'routes.docs_json'));
+            (! is_null($jsonFile) ? $jsonFile : $this->docsJson);
 
         if (! File::exists($filePath)) {
             abort(404, 'Cannot find '.$filePath);
@@ -55,7 +55,7 @@ class SwaggerController extends BaseSwaggerController
                 'project'            => $this->project ,
                 'secure'             => Request::secure(),
                 'urlToDocs'          => route("l5-swagger.{$this->project}.docs",
-                    config($this->projectConfigPath .'routes.docs_json', 'api-docs.json')),
+                    $this->docsJson),
                 'operationsSorter'   => config($this->configPath . 'operations_sort'),
                 'configUrl'          => config($this->configPath . 'additional_config_url'),
                 'validatorUrl'       => config($this->configPath . 'validator_url'),

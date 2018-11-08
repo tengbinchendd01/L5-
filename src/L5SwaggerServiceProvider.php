@@ -14,12 +14,11 @@ class L5SwaggerServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-
         $viewPath = __DIR__ . '/../resources/views';
         $this->loadViewsFrom($viewPath, 'l5-swagger');
 
         // Publish a config file
-        $configPath = __DIR__.'/../config/l5-swagger.php';
+        $configPath = __DIR__ . '/../config/l5-swagger.php';
         $this->publishes([
             $configPath => config_path('l5-swagger.php'),
         ], 'config');
@@ -31,8 +30,7 @@ class L5SwaggerServiceProvider extends ServiceProvider
 
         //Include routes
         \Route::group(['namespace' => 'L5Swagger'], function($router) {
-            $projects = config("l5-swagger.projects") ;
-            require __DIR__ .'/routes.php';
+            require __DIR__ . '/routes.php';
         });
 
         //Register commands

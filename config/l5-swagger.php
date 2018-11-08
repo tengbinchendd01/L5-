@@ -1,10 +1,6 @@
 <?php
 
 return [
-    'projects' => [
-        //'V1' => require_once(base_path('app') . '/V1/config/l5-swagger.php'),
-        //'V2' => require_once(base_path('app') . '/V2/config/l5-swagger.php'),
-    ],
 
     'paths'    => [
         /*
@@ -155,5 +151,12 @@ return [
      */
     'constants'     => [
         'L5_SWAGGER_CONST_HOST' => env('L5_SWAGGER_CONST_HOST', 'http://my-default-host.com'),
+    ],
+
+    'middleware' => [
+        'api'             => [],
+        'asset'           => [],
+        'docs'            => [],
+        'oauth2_callback' => [],
     ],
 ];

@@ -11,17 +11,16 @@ use Illuminate\Routing\Controller as BaseController;
 
 class BaseSwaggerController extends BaseController
 {
-    public $project           = "V1";
+    public $project           = "v1";
     public $configPath        = "l5-swagger.";
-    public $projectConfigPath = "l5-swagger.projects.";
 
     public function __construct()
     {
         $path    = Request::path();
         $pathArr = explode('/', $path);
         if (isset($pathArr[0])) {
-            $this->project           = strtoupper($pathArr[0]);
-            $this->projectConfigPath = $this->projectConfigPath . $this->project . '.';
+            $this->project           = $pathArr[0];
+            $this->docsJson = $this->project .'-api-docs.json';
         }
     }
 }
