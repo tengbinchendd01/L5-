@@ -2,8 +2,8 @@
 
 return [
     'projects' => [
-        'V1' => require_once(base_path('app') . '/V1/config/l5-swagger.php'),
-        'V2' => require_once(base_path('app') . '/V2/config/l5-swagger.php'),
+        //'V1' => require_once(base_path('app') . '/V1/config/l5-swagger.php'),
+        //'V2' => require_once(base_path('app') . '/V2/config/l5-swagger.php'),
     ],
 
     'paths'    => [
