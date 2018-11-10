@@ -14,8 +14,7 @@ class Generator
         if (count($runArr) < 1 || !in_array($project, $runArr)) {
             throw new \Exception("no run project");
         }
-        $project  = strtolower($project);
-        $docsJson = "{$project}-api-docs.json";
+        $docsJson = strtolower($project) ."-api-docs.json";
 
         $appDir  = config('l5-swagger.paths.annotations');
         $docDir  = config('l5-swagger.paths.docs');
