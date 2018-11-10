@@ -10,7 +10,7 @@ if (count($runArr)) {
             'uses'       => '\L5Swagger\Http\Controllers\SwaggerController@api',
         ]);
 
-        $router->any("/{$p}/docs", [
+        $router->any("/{$p}/docs" .'/{jsonFile?}', [
             'as'         => "l5-swagger.{$p}.docs",
             'middleware' => config('l5-swagger.middleware.docs', []),
             'uses'       => '\L5Swagger\Http\Controllers\SwaggerController@docs',
