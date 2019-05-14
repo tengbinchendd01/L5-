@@ -19,8 +19,12 @@ class SwaggerController extends BaseSwaggerController
      */
     public function docs($jsonFile = null)
     {
-        $filePath = config($this->configPath . 'paths.docs').'/'.
-            (! is_null($jsonFile) ? $jsonFile : $this->docsJson);
+        if (empty($jsonFile)){
+            return Response::make("", 200, [
+                'Content-Type' => 'application/json',
+            ]);
+        }
+        $filePath = config('l5-swagger.paths.docs').'/'.$jsonFile;
 
         if (! File::exists($filePath)) {
             abort(404, 'Cannot find '.$filePath);
@@ -40,25 +44,14 @@ class SwaggerController extends BaseSwaggerController
      */
     public function api()
     {
-        if (config($this->configPath . 'generate_always')) {
-            Generator::generateDocs();
-        }
-
-        if (config($this->configPath . 'proxy')) {
-            $proxy = Request::server('REMOTE_ADDR');
-            Request::setTrustedProxies([$proxy]);
-        }
-
-        // Need the / at the end to avoid CORS errors on Homestead systems.
+        $json = Request::input("file" , "");
         $response = Response::make(
             view('l5-swagger::index', [
-                'project'            => $this->project ,
                 'secure'             => Request::secure(),
-                'urlToDocs'          => route("l5-swagger.{$this->project}.docs",
-                    $this->docsJson),
-                'operationsSorter'   => config($this->configPath . 'operations_sort'),
-                'configUrl'          => config($this->configPath . 'additional_config_url'),
-                'validatorUrl'       => config($this->configPath . 'validator_url'),
+                'urlToDocs'          => route("l5-swagger.docs", $json),
+                'operationsSorter'   => config('l5-swagger.operations_sort'),
+                'configUrl'          => config('l5-swagger.additional_config_url'),
+                'validatorUrl'       => config('l5-swagger.validator_url'),
             ]),
             200
         );

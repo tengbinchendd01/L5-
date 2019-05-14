@@ -7,21 +7,15 @@ use Config;
 
 class Generator
 {
-    public static function generateDocs($project)
+    public static function generateDocs($project, $docName)
     {
-        $runVersion = config("app.run_version");
-        $runArr     = explode(',', $runVersion);
-        if (count($runArr) < 1 || !in_array($project, $runArr)) {
-            throw new \Exception("no run project");
-        }
-        $docsJson = strtolower($project) ."-api-docs.json";
 
+        $docsJson = $docName;
         $appDir  = config('l5-swagger.paths.annotations');
         $docDir  = config('l5-swagger.paths.docs');
         $docFile = $docDir . '/' . $docsJson;
 
         if (File::exists($docDir)) {
-            // delete all existing documentation
             if (File::exists($docFile)) {
                 File::delete($docFile);
             }
